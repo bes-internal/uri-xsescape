@@ -1,41 +1,41 @@
 package URI::XSEscape;
 
-use strict;
-use warnings;
+# use strict;
+# use warnings;
 
 use XSLoader;
-use parent 'Exporter';
+# use parent 'Exporter';
 
 our $VERSION = '0.001000';
 XSLoader::load( 'URI::XSEscape', $VERSION );
 
-our @EXPORT_OK = qw{
-    uri_escape
-    uri_escape_utf8
-    uri_unescape
-};
+# our @EXPORT_OK = qw{
+#     uri_escape
+#     uri_escape_utf8
+#     uri_unescape
+# };
+#
+# sub uri_escape_utf8 {
+#     my ($text, $more) = @_;
+#     return undef unless defined($text);
+#
+#     utf8::encode($text);
+#     return uri_escape($text) unless defined($more);
+#     return uri_escape($text, $more);
+# }
 
-sub uri_escape_utf8 {
-    my ($text, $more) = @_;
-    return undef unless defined($text);
-
-    utf8::encode($text);
-    return uri_escape($text) unless defined($more);
-    return uri_escape($text, $more);
-}
-
-eval {
-    # ENV{'PERL_URI_XSESCAPE'} = undef # yes
-    # ENV{'PERL_URI_XSESCAPE'} = 1     # yes
-    # ENV{'PERL_URI_XSESCAPE'} = 0     # no
-    if ( ! defined $ENV{'PERL_URI_XSESCAPE'} || $ENV{'PERL_URI_XSESCAPE'} ) {
-        require URI::Escape;
-
-        *URI::Escape::uri_escape           = *URI::XSEscape::uri_escape;
-        *URI::Escape::uri_escape_utf8      = *URI::XSEscape::uri_escape_utf8;
-        *URI::Escape::uri_unescape         = *URI::XSEscape::uri_unescape;
-    }
-};
+# eval {
+#     # ENV{'PERL_URI_XSESCAPE'} = undef # yes
+#     # ENV{'PERL_URI_XSESCAPE'} = 1     # yes
+#     # ENV{'PERL_URI_XSESCAPE'} = 0     # no
+#     if ( ! defined $ENV{'PERL_URI_XSESCAPE'} || $ENV{'PERL_URI_XSESCAPE'} ) {
+#         require URI::Escape;
+#
+#         *URI::Escape::uri_escape           = *URI::XSEscape::uri_escape;
+#         *URI::Escape::uri_escape_utf8      = *URI::XSEscape::uri_escape_utf8;
+#         *URI::Escape::uri_unescape         = *URI::XSEscape::uri_unescape;
+#     }
+# };
 
 1;
 

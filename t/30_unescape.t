@@ -3,6 +3,7 @@ use warnings;
 
 use Test::More;
 use URI::Escape;
+use URI::Escape::XS;
 use URI::XSEscape;
 
 exit main(@ARGV);
@@ -26,6 +27,8 @@ sub test_strings {
     foreach my $string (@strings) {
         my $unescaped = URI::XSEscape::uri_unescape($string);
         my $wanted = URI::Escape::uri_unescape($string);
+		my $wanted2 = URI::Escape::XS::decodeURIComponent($string);
         is($unescaped, $wanted, "unescaping of string [$string] works");
+		is($unescaped, $wanted2, "unescaping of string [$string] works");
     }
 }
